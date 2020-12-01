@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>C002</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="c001/Css/C002.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row">
+            <form action="/c002/$congDan.getId()" method="POST" enctype="multipart/form-data">
+                <div class="col-md-10">
+
+                    <p class="titleTT">Thông tư số 66/2015/TT-BCA ngày 15/12/2015</p>
+                    <div id="footer" class="border border-secondary">
+                        <div class="mavach">
+                            (Mã số)
+                       
+                            <span>$congDan.getMaVach()</span>
+                        </div>
+                        <div class="SCCCD">
+                            <p>PHIẾU THU NHẬN THÔNG TIN CĂN CƯỚC CÔNG DÂN</p>
+                            <span>Số thẻ CCCD</span>
+                            <input type="text" name="soTheCCCD" value = "000$congDan.getId()" >
+                        </div>
+                    </div>
+                </div>
+                <div id="content1-info" class="col-md-10">
+                    <div class="col-md-8">
+                        <label for="usr">1. Họ, chữ đệm và tên:</label>
+                        <input type="text" class="form-control" name="hoVaTen" id="usr"
+                        #if($congDan.getHoVaTen()) 
+                    		value = "$congDan.getHoVaTen()"
+                    	#end >
+                        <label for="usr">2. Họ, chữ đệm và tên gọi khác (nếu có):</label>
+                        <input type="text" class="form-control" name="tenGoiKhac" id="usr"
+                         #if($congDan.getTenKhac()) 
+                    		value = "$congDan.getTenKhac()"
+                         #end >
+                         <div style="width: 50%; float: left;">
+                            <label for="usr">3. Ngày, tháng, năm sinh:</label>
+                            <input type="date" class="form-control" name="birthDay" id="usr"
+                             #if($congDan.getNgaySinh()) 
+                                value = "$congDan.getNgaySinh()"
+                             #end>
+                         </div>
+                         <div  style="width: 40%; float: right;">
+                            <label for="usr">4. Giới tính:</label>
+                            <input type="date" class="form-control" name="birthDay" id="usr"
+                             #if($congDan.getNgaySinh()) 
+                                value = "$congDan.getNgaySinh()"
+                             #end>
+                         </div>
+                        
+                    </div>
+                    <div id="image" class="col-md-2">
+                        <label for="file" style="cursor: pointer;">17. Image 4x6</label>
+                        <input style="display: none;" type="file" accept="image/*" name="imageChanDung" id="file">
+                        <img id="outputGP" src="/image/imageChanDung.jpg" />
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-8">
+                        <label for="usr">5. Số CMND/CCCD đã được cấp:</label>
+                        <input type="text" class="form-control" name="SoCMND/CCCD" id="usr">
+                    </div> 
+                </div>
+                
+                <div class="col-md-10">
+                    <div class="col-md-4">
+                        <label for="usr">Cấp ngày: </label>
+                        <input type="date" class="form-control" name="capNgay" id="usr">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="usr">Nơi Cấp: </label>
+                        <select class="form-control" id="sel1" name = "noiCap">
+                            <option value = "Công An TP Hà Nội" >Công An TP Hà Nội</option>
+                            <option value = "Công An Ninh Bình" >Công An Ninh Bình</option>
+                            <option value = "Công An TP HCM">Công An TP HCM</option>
+                        </select>
+                    </div>
+                </div>
+
+                
+                <div class="col-md-10">
+                    <div class="col-md-3">
+                        <label for="usr">6. Dân tộc: </label>
+                        <select class="form-control" id="sel1" name = "danToc">
+                           <option value="Kinh">Kinh </option>
+                                <option value="Mường">Mường</option>
+                                <option value="Tày">Tày </option>
+                                <option value="Thái">Thái</option>
+                                <option value="Nùng">Nùng</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="usr">7. Tôn giáo: </label>
+                        <select class="form-control" id="sel1" name = "tonGiao">
+                              <option value="Không">Không tôn giáo</option>
+                                <option value="Phật Giáo">Phật giáo</option>
+                                <option value="Công Giáo">Công giáo</option>
+                                <option value="Khác">Khác</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="usr">8. Quốc tịch:</label>
+                        <select class="form-control" id="sel1" name = "quocTich">
+                                <option value="Việt Nam">Việt Nam</option>
+                                <option value="Japan">Nhật Bản</option>
+                                <option value="China">Trung Quốc</option>
+                                <option value="USA">Mỹ</option>
+                                <option value="Nga">Nga</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-8">
+                        <label for="usr">9. Nơi đăng ký khai sinh:</label>
+                        <input type="text" class="form-control" name="dangKiKK" id="usr"
+                        #if($congDan.getNoiDKKhaiSinh()) 
+                    		value = "$congDan.getNoiDKKhaiSinh()"
+                    	#end >
+                        <label for="usr">10. Quên quán:</label>
+                        <input type="text" class="form-control" name="queQuan" id="usr"
+                        #if($congDan.getQueQuan()) 
+                    		value = "$congDan.getQueQuan()"
+                    	#end >
+                        <label for="usr">11. Nơi thường trú:</label>
+                        <input type="text" class="form-control" name="thuongTru" id="usr"
+                        #if($congDan.getThuongTru()) 
+                    		value = "$congDan.getThuongTru()"
+                    	#end >
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-5">
+                        <label for="usr">12. Nghề nghiệp:</label>
+                        <input type="text" class="form-control" name="ngheNghiep" id="usr"
+ 						#if($congDan.getNgheNghiep()) 
+                    		value = "$congDan.getNgheNghiep()"
+                    	#end >
+                    </div>
+                    <div class="col-md-3">
+                        <label for="usr">13. Trình độ học vấn:</label>
+                        <select class="form-control" id="gender" name="hocVan">
+                            <option value="1/12">1/12</option>
+                            <option value="2/12">2/12</option>
+                            <option value="3/12">3/12</option>
+                            <option value="4/12">4/12</option>
+                            <option value="5/12">5/12</option>
+                            <option value="6/12">6/12</option>
+                            <option value="7/12">7/12</option>
+                            <option value="8/12">8/12</option>
+                            <option value="9/12">9/12</option>
+                            <option value="10/12">10/12</option>
+                            <option value="11/12">11/12</option>
+                            <option value="12/12">12/12</option>
+                            <option value="Trung Cấp">Trung cấp</option>
+                            <option value="Cao Đẳng">Cao đẳng</option>
+                            <option value="Đại Học">Đại học</option>
+                            <option value="Khác">Khác</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-8">
+                        <label for="usr">14. Họ, chữ đệm và tên của cha:</label>
+                        <input type="text" class="form-control" name="hoTenCha" id="usr"
+                        #if($congDan.getHoTenCha()) 
+                    		value = "$congDan.getHoTenCha()"
+                    	#end >
+                        <label for="usr">15. Họ, chữ đệm và tên của mẹ:</label>
+                        <input type="text" class="form-control" name="hoTenMe" id="usr"
+                        #if($congDan.getHoTenMe()) 
+                    		value = "$congDan.getHoTenMe()"
+                    	#end >
+                        <label for="usr">16. Họ, chữ đệm và tên của vợ (chồng):</label>
+                        <input type="text" class="form-control" name="tenVoOrChong" id="usr"
+                        #if($congDan.getHoTenVoOrChong()) 
+                    		value = "$congDan.getHoTenVoOrChong()"
+                    	#end >
+                        <label for="usr">18. Đặc điểm nhận dạng:</label>
+                        <input type="text" class="form-control" name="dacDiemNhanDang" id="usr">
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-3">
+                        <label for="usr">19. Loại Cấp: </label>
+                        <select class="form-control" id="sel1" name = "loaiCap">
+                           <option value="Cấp mới">Cấp mới</option>
+                            <option value="Đổi lại">Đổi lại</option>
+                            <option value="Cấp lại">Cấp lại</option>
+                            <option value="Xác nhận">Xác nhận</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <label for="usr">20. Cấp lần thứ: </label>
+                        <select class="form-control" id="sel1" name = "lanCap">
+                            <option value = 1>1</option>
+                            <option value = 2>2</option>
+                            <option value = 3>3</option>
+                            <option value = 4>4</option>
+                            <option value = 5>5</option>
+                        </select>
+                    </div>
+               
+                    <div class="col-md-3">
+                        <label for="usr">21. Đơn vị cấp: </label>
+                        <select class="form-control" id="sel1" name = "donViCap">
+                            <option value = "Công An TP Hà Nội">Công An TP Hà Nội</option>
+                            <option value = "Công An Ninh Bình">Công An Ninh Bình</option>
+                            <option value = "Công An TP HCM">Công An TP HCM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div id="vanTayPhai" class="col-md-10">
+                        <div>
+                            <label for="Cp" style="cursor: pointer;">Cái phải</label>
+                            <input style="display: none;" type="file" id="Cp" accept="image/*" name="imageCaiPhai"
+                                onchange="loadFile(event,'outputCP')">
+                            <img id="outputCP" />
+                        </div>
+                        <div>
+                            <label for="Tp" style="cursor: pointer;">Trỏ phải</label>
+                            <input style="display: none;" type="file" id="Tp" accept="image/*" name="imageTroPhai"
+                                onchange="loadFile(event,'outputTP')">
+                            <img id="outputTP" />
+                        </div>
+                        <div>
+                            <label for="Gp" style="cursor: pointer;">Giữa phải</label>
+                            <input style="display: none;" type="file" id="Gp" accept="image/*" name="imageGiuaPhai"
+                                onchange="loadFile(event,'outputGP')">
+                            <img id="outputGP" />
+                        </div>
+                        <div>
+                            <label for="Np" style="cursor: pointer;">Nhẫn phải</label>
+                            <input style="display: none;" type="file" id="Np" accept="image/*" name="imageNhanPhai"
+                                onchange="loadFile(event,'outputNP')">
+                            <img id="outputNP" />
+                        </div>
+                        <div>
+                            <label for="Up" style="cursor: pointer;">Út phải</label>
+                            <input style="display: none;" type="file" id="Up" accept="image/*" name="imageUtPhai"
+                                onchange="loadFile(event,'outputUP')">
+                            <img id="outputUP" />
+                        </div>
+                    </div>
+
+                    <div id="vanTayTrai" class="col-md-10">
+                        <div>
+                            <label for="Ct" style="cursor: pointer;">Cái trái</label>
+                            <input style="display: none;" type="file" id="Ct" accept="image/*" name="imageCaiTrai"
+                                onchange="loadFile(event,'outputCT')">
+                            <img id="outputCT" />
+                        </div>
+                        <div>
+                            <label for="Tt" style="cursor: pointer;">Trỏ trái</label>
+                            <input style="display: none;" type="file" id="Tt" accept="image/*" name="imageTroTrai"
+                                onchange="loadFile(event,'outputTT')">
+                            <img id="outputTT" />
+                        </div>
+                        <div>
+                            <label for="Gt" style="cursor: pointer;">Giữa trái</label>
+                            <input style="display: none;" type="file" id="Gt" accept="image/*" name="imageGiuaTrai"
+                                onchange="loadFile(event,'outputGT')">
+                            <img id="outputGT" />
+                        </div>
+                        <div>
+                            <label for="Nt" style="cursor: pointer;">Nhẫn trái</label>
+                            <input style="display: none;" type="file" id="Nt" accept="image/*" name="imageNhanTrai"
+                                onchange="loadFile(event,'outputNT')">
+                            <img id="outputNT" />
+                        </div>
+                        <div>
+                            <label for="Ut" style="cursor: pointer;">Út trái</label>
+                            <input style="display: none;" type="file" id="Ut" accept="image/*" name="imageUtTrai"
+                                onchange="loadFile(event,'outputUT')">
+                            <img id="outputUT" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div id="vanTayNgonChum" class="col-md-10">
+                        <div class="col-md-5">
+                            <label for="bonNgonTrai" style="cursor: pointer;">4 ngón chụm tay trái</label>
+                            <input style="display: none;" type="file" id="bonNgonTrai" accept="image/*"
+                                name="bonNgonTrai" onchange="loadFile(event,'output4NT')">
+                            <img id="output4NT" />
+                        </div>
+                        <div class="col-md-5">
+                            <label for="bonNgonPhai" style="cursor: pointer;">4 ngón chụm tay phải</label>
+                            <input style="display: none;" type="file" id="bonNgonPhai" accept="image/*"
+                                name="bonNgonPhai" onchange="loadFile(event,'output4NP')">
+                            <img id="output4NP" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10" style="margin-bottom: 50px;">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        <span for="usr">22. Cán bộ kiểm tra</span><br>
+                        <span for="usr">&nbsp <i>(Kí, ghi rõ họ tên)</i></span><br>
+                         <span> Ten cán bộ</span>
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-4">
+                        <i>
+                            <span >23. Hà Nội,</span>&nbsp
+                            <span > ngày </span>
+                            <span id="ngay">  </span>
+                            <span > tháng </span>
+                            <span id="thang"></span>
+                            <span > năm </span>
+                            <span id="nam"></span>
+                        </i><br>
+                        <p style="font-weight: bold;">&emsp; Người khai ký, ghi rõ họ tên </p>
+
+                    </div>
+                </div>
+                <!--
+                <div style="margin-bottom: 30px;" class="col-md-10">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-success">Hủy</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </div>
+                -->
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $(document).ready(function () {
+                var today = new Date();
+                $("#ngay").text(today.getDate());
+                $("#thang").text(today.getMonth() + 1);
+                $("#nam").text( today.getFullYear());
+            });
+        });
+        var loadFile = function (event, idImage) {
+            var image = document.getElementById(idImage);
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+</body>
+
+</html>

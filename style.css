@@ -1,0 +1,125 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 16px;
+}
+.container {
+    width: 90%;
+    margin: auto;
+}
+.content1 {
+    height: 300px;
+}
+.content1-info {
+    height: 100%;
+    width: 80%;
+    float: left;
+}
+.image {
+    height: 100%;
+    float: right;
+    width: 19%;
+    border: 1px solid;
+}
+.title {
+    height: 70px;
+    border: 1px solid;
+    margin-top: 20px;
+}
+.title .mavach {
+    width: 13%;
+    height: 99%;
+    float: left;
+    border: 1px solid
+}
+.title .SCCCD {
+    width: 70%;
+    height: 100%;
+    float: left;
+}
+.head {
+	text-align: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.title .SCCCD p {
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+.title .SCCCD span {
+    margin-left: 145px;
+}
+.info {
+    margin-top: 15px;
+    height: 230px;
+}
+.titleTT {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+th, td {
+    padding-top: 10px;
+}
+.content2-info {
+    margin-top: 35px;
+}
+.vanTay {
+    margin-top: 15px;
+}
+.vanTay, .vanTay tr , .vanTay tr td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 30px;
+}
+.listTheCC, .listTheCC tr , .listTheCC tr td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 20px;
+}
+.footer {
+    margin-top: 20px;
+    height: 90px;
+}
+.footer p {
+    font-weight: bold;
+    margin-top: 20px;
+}
+.canBoKT {
+    float: left;
+    width: 40%;
+}
+.nguoiKhai {
+    float: left;
+}
+.tinhThanh {
+    float: left;
+}
+.btn {
+    margin-bottom: 40px;
+    margin-left: 100px;
+}
+.btn input {
+    width: 90px;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 10px;
+    margin: 5px 0;
+    border: none;
+    border-radius: 1px;
+    cursor: pointer;
+}
+.footerC007 {
+    margin-top: 20px;
+}
+.chucDanh {
+    margin-left: 300px;
+}
+.chucDanh input[type="text"] {
+    margin-top: 10px;
+}

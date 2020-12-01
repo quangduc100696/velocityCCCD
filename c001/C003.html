@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giấy hẹn</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<style>    
+    .form__header-right p {
+        font-weight: 500;
+    }
+    .form__header-center h3,
+    .form__header-center p,
+    .form__header-name h3,
+    .form__header-right p,
+    .form__footer-right p,
+    .form__footer-right h3,
+    .form__header-name h4 {
+        text-align: center;
+    }
+    
+    .form__header-center h3,
+    .form__header-name h3,
+    .form__header-name h4 {
+        text-transform: uppercase;
+    }
+    
+    .form__header-center p {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 20px;
+        margin: 0!important;
+    }
+    
+    .form__header-name h3 {
+        margin-top: 30px;
+    }
+</style>
+
+<body>
+<form action ="/C001/giayhen/$giayHen.getId()" method = "POST">
+    <div class="container">
+        <div class="row">
+            <div class="col-6 col-md-6"></div>
+            <div class="col-6 col-md-6">
+                <div class="form__header-right">
+                    <p>Thông tư số 66/2015/TT-BCA ngày 15/12/2015</p>
+                </div>
+            </div>
+        </div>
+        <div class="form__header-center">
+            <h3>Cộng hòa xã hội chủ nghĩa Việt Nam</h3>
+            <p>Độc lập - Tự do - Hạnh phúc</p>
+            <p>--------------</p>
+        </div>
+        <div class="form__header-name">
+            <h3>Giấy hẹn</h3>
+            <h4>Trả thẻ Căn cước công dân</h4>
+        </div>
+     
+        <div class="row">
+            <div class="col-6">
+	 			<div class="form-group"> <label class="control-label">Công an : </label>
+	                <select class="form-control" id="gender" name = "coQuanCA">
+	                        <option value="other">...</option>
+	                        <option value="Công An Hà Nội">Công An Hà Nội</option>
+	                        <option value="Công An Hà Nam">Công An Hà Nam</option>
+	                        <option value="Công An Ninh Bình">Công An Ninh Bình</option>
+	                        <option value="Công An Hòa Bình">Công An Hòa Bình</option>
+	                  </select>
+	               </div>
+                <div class="form_footer-right">
+                    <span>đã tiếp nhận hồ sơ và làm thủ tục thẻ Căn cước công dân đối với công dân:</span>
+                </div>
+               <div class="form-group"> <label class="control-label">Họ, tên đệm công dân: </label>
+                    <div> <p> $giayHen.getCongDan().getHoVaTen() </p></div>
+                </div>
+                
+                <div class="form-group"> <label class="control-label">Sinh ngày: </label>
+                    <div> <p> $giayHen.getCongDan().getNgaySinh() </p></div>
+                </div>
+
+                <div class="form-group"> <label class="control-label">Giới tính: </label>
+                    <div> <p> #if($giayHen.getCongDan().getGioiTinh() == 1) 
+                    				Nam
+                    		  #elseif($giayHen.getCongDan().getGioiTinh() == 2) 
+                    		  	    Nữ
+                    		  #else 
+                    		  		Khác
+                    		  #end
+                     </p></div>
+                </div>
+				
+				<div class="form-group"> <label class="control-label">Nơi thường trú: </label>
+                    <div> <p> $giayHen.getCongDan().getThuongTru() </p></div>
+                </div>
+                <input style="display: none;" type="text" value = "$giayHen" name = "giayHenDto">
+                <div class="form__footer-right">
+                   
+                    <span> Thời gian hẹn công dân đến bổ sung thông tin thẻ căn cước công dân:</span>
+                    <br>
+                    
+                    <div class="form-group"> <label class="control-label">Ngày: </label>
+                        <div> <input class="form-control" id="ngayHen" type="date" name = "ngayHen"> </div>
+                    </div>
+                    
+                    <span>Vào lúc </span>
+                    <select name="gio">
+							<option>8</option>
+							<option>9</option>
+							<option>10</option>
+							<option>11</option>
+							<option>12</option>
+							<option>13</option>
+							<option>14</option>
+							<option>15</option>
+							<option>16</option>
+							<option>17</option>
+							<option>18</option>
+							<option>19</option>
+					</select>
+					<span>giờ</span>
+                    <select  name="phut">
+                    	<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+						<option>6</option>
+						<option>7</option>
+						<option>8</option>
+						<option>9</option>
+						<option>10</option>
+						<option>11</option>
+						<option>12</option>
+						<option>13</option>
+						<option>14</option>
+						<option>15</option>
+						<option>16</option>
+						<option>17</option>
+						<option>18</option>
+						<option>19</option>
+						<option>20</option>
+						<option>21</option>
+						<option>22</option>
+						<option>23</option>
+						<option>24</option>
+						<option>25</option>
+						<option>26</option>
+						<option>27</option>
+						<option>28</option>
+						<option>29</option>
+						<option>30</option>
+						<option>31</option>
+						<option>32</option>
+						<option>33</option>
+						<option>34</option>
+						<option>35</option>
+						<option>36</option>
+						<option>37</option>
+						<option>38</option>
+						<option>39</option>
+						<option>40</option>
+						<option>41</option>
+						<option>42</option>
+						<option>43</option>
+						<option>44</option>
+						<option>45</option>
+						<option>46</option>
+						<option>47</option>
+						<option>48</option>
+						<option>49</option>
+						<option>50</option>
+						<option>51</option>
+						<option>52</option>
+						<option>53</option>
+						<option>54</option>
+						<option>55</option>
+						<option>56</option>
+						<option>57</option>
+						<option>58</option>
+						<option>59</option>
+						<option>60</option>
+                    </select>
+                    <span>phút</span>
+                </div>
+
+                <div class="form__footer-right">
+                    <div class="form-group"> <label class="control-label">Địa chỉ: </label>
+                    <div> <input class="form-control" id="diaChi" type="text" name = "diaChi"> </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3"></div>
+                <div class="col-3">
+                    <div class="form__footer-right">
+                    <span>Ngày </span><span id = "date" name = "date"></span><br>
+                        <h3>Người lập giấy hẹn</h3>
+                        <p><i>(Ghi rõ họ tên)</i></p>
+                            <div> <input class="form-control" id="tenCBXN" type="text" name = "tenCBXN"> </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-2">
+                <button style="margin-top: 15px; width: 100px;" type="submit" class="btn btn-success">Gửi</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    $(function() {
+            $(document).ready(function() {
+            var today = new Date();
+            var time = today.getDate() + "/" + (today.getMonth()+1) + "/" + today.getFullYear();
+            $("#date").text(time);
+        });
+    });
+</script>
+</body>
+</html>

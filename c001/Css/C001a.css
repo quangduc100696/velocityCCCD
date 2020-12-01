@@ -1,0 +1,32 @@
+/* Css form */
+
+.form__header-right p {
+    font-weight: 500;
+}
+
+.form__header-center h3,
+.form__header-center p,
+.form__header-name h3,
+.form__header-right p,
+.form__footer-right p,
+.form__footer-right h3,
+.form__header-name h4 {
+    text-align: center;
+}
+
+.form__header-center h3,
+.form__header-name h3,
+.form__header-name h4 {
+    text-transform: uppercase;
+}
+
+.form__header-center p {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+    margin: 0!important;
+}
+
+.form__header-name h3 {
+    margin-top: 30px;
+}

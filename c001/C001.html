@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C001</title>
+    <script src="./js/main.js"></script>
+    <link rel="stylesheet" href="/css/C001.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .error {
+            border: 1px solid red;
+        }
+
+        .textError {
+            color: red;
+        }
+
+        .clearBoder {
+            border: none;
+        }
+
+        .requiredField {
+            color: red;
+            font-weight: bold;
+        }
+
+        .dv {
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="formC001" class="form-horizontal" action="/c001/$congDan.getId()" method="POST"
+        onsubmit="return validateForm()">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-6"></div>
+                <div class="col-6 col-md-6">
+                    <div class="form__header-right">
+                        <p>Mẫu CC01 ban hành kèm theo</p>
+                        <p>Thông tư số 41/2019/TT-BCA ngày 01/10/2019</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form__header-name">
+                <h3>TỜ KHAI <span name="dv" class="dv">$congDan.getYeuCauCongDan()</span> CĂN CƯỚC CÔNG DÂN</h3>
+            </div>
+            <div class="form__mail-content mt-4">
+                <div class="form-group"> <label for="hoTen" class="control-label">
+                        1. Họ, chữ đệm và tên<span class="requiredField">*</span></label>
+                    <div>
+                        <input class="form-control" id="hoTen" name="hoTen" type="text"
+                            onblur="validate('#hoTen', '#errorHT', 'Vui lòng nhập họ và tên')">
+                        <span id="errorHT"></span>
+                    </div>
+                </div>
+                <div class="form-group"> <label for="hoTenKhac" class="control-label">
+                        2. Họ, chữ đệm và tên gọi khác (nếu có)</label>
+                    <div> <input class="form-control" id="hoTenKhac" name="hoTenKhac" type="text"> </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="date">3. Ngày, tháng, năm sinh<span class="requiredField">*</span></label><br>
+
+                            <input style="height: 37px; width: 100%;" id="date" type="date" name="ngaySinh"
+                                onblur="validate('#date', '#errorNTN', 'Vui lòng chọn ngày tháng năm sinh')">
+                            <span id="errorNTN"></span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="gioiTinh">4. Giới tính (Nam/nữ)<span class="requiredField">*</span></label>
+                            <select class="form-control" id="gioiTinh" name="gioiTinh"
+                                onblur="validate('#gioiTinh', '#errorGT', 'Vui lòng chọn giới tính')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value=1>Nam </option>
+                                <option value=2>Nữ</option>
+                                <option id="cdGioiTinh" value="$congDan.getGioiTinh()" style="display: none;"></option>
+                            </select>
+                            <span id="errorGT"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <label for="socmnd" class="control-label">5. Số CMND/CCCD<span class="requiredField">
+                            #if($congDan.getYeuCauCongDan() != "Cấp mới")
+                            *
+                            #else
+                            ""
+                            #end
+                        </span></label>
+                    <div> <input class="form-control" type="text" id="socmnd" type="number" name="CMND"
+                            value="$congDan.getCmnd()" onblur="validateCMND('#socmnd', '#errorCMND')">
+                    </div>
+                    <input type="text" id="checkCC" style="display: none;" value="No">
+                    <span id="errorCMND"></span>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="danToc">6. Dân tộc<span class="requiredField">*</span></label>
+                            <select class="form-control" id="danToc" name="danToc"
+                                onblur="validate('#danToc', '#errorDToc', 'Vui lòng chọn dân tộc')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Không">Kinh</option>
+                                <option value="Phật Giáo">Mường</option>
+                                <option value="Công Giáo">Nùng</option>
+                                <option value="Khác">Khác</option>
+                                <option id="cdDanToc" value="$congDan.getDanToc()" style="display: none;"></option>
+                            </select>
+                            <span id="errorDToc"></span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="tg">7. Tôn giáo<span class="requiredField">*</span></label>
+                            <select class="form-control" id="tg" name="tonGiao"
+                                onblur="validate('#tg', '#errorTG', 'Vui lòng chọn tôn giáo')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Không">Tôn giáo không</option>
+                                <option value="Phật Giáo">Phật giáo</option>
+                                <option value="Công Giáo">Công giáo</option>
+                                <option value="Khác">Khác</option>
+                                <option id="cdTonGiao" value="$congDan.getTonGiao()" style="display: none;"></option>
+                            </select>
+                            <span id="errorTG"></span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="qt" class="control-label">8. Quốc tịch<span
+                                    class="requiredField">*</span></label>
+                            <select class="form-control" id="qt" name="quocTich"
+                                onblur="validate('#qt', '#errorQT', 'Vui lòng chọn quốc tịch')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Việt Nam">Việt Nam</option>
+                                <option value="Japan">Nhật Bản</option>
+                                <option value="China">Trung Quốc</option>
+                                <option value="USA">Mỹ</option>
+                                <option value="Nga">Nga</option>
+                                <option id="cdQuocTich" value="$congDan.getQuocTich()" style="display: none;"></option>
+                            </select>
+                            <span id="errorQT"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="honNhan" class="control-label">9. Tình trạng hôn nhân<span
+                                    class="requiredField">*</span></label>
+                            <select class="form-control" id="honNhan" name="honNhan"
+                                onblur="validate('#honNhan', '#errorHN', 'Vui lòng chọn tình trạng hôn nhân')">
+                                <option value="">Chưa xác định</option>
+                                <option value="Chưa kết hôn">Chưa kết hôn</option>
+                                <option value="Đã kết hôn">Đã kết hôn</option>
+                                <option value="Đã ly hôn">Đã ly hôn</option>
+                                <option id="cdHonNhan" value="$congDan.getHonNhan()" style="display: none;"></option>
+                            </select>
+                            <span id="errorHN"></span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="nhomMau" class="control-label">10. Nhóm máu(nếu có)</label>
+                            <select class="form-control" id="nhomMau" name="nhomMau">
+                                <option value="">Chưa xác định</option>
+                                <option value="O">O</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="AB">AB</option>
+                                <option id="cdNhomMau" value="$congDan.getNhomMau()" style="display: none;"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <p>11. Nơi đăng ký khai sinh:</p>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="ttp1" class="control-label">Tỉnh/thành phố<span
+                                    class="requiredField">*</span></label>
+                            <select class="form-control" id="ttp1" name="tinhTPNS"
+                                onblur="validate('#ttp1', '#errorTTP1', 'Vui lòng chọn tỉnh/ thành phố')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Hà Nội">Hà Nội</option>
+                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                <option value="Hà Giang">Hà Giang</option>
+                                <option value="Cao Bằng">Cao Bằng</option>
+                                <option value="Bắc Cạn">Bắc Cạn</option>
+                                <option id="cdTTP" value="$address.getkSTinhTP()" style="display: none;"></option>
+                            </select>
+                            <span id="errorTTP1"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="qh1">Quận/huyện<span class="requiredField">*</span></label>
+                            <select class="form-control" id="qh1" name="qHuyenNS"
+                                onblur="validate('#qh1', '#errorQH1', 'Vui lòng chọn quận/ huyện')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Thanh Xuân">Thanh Xuân</option>
+                                <option value="Cầu Giấy">Cầu Giấy</option>
+                                <option value="Tây Hồ">Tây Hồ</option>
+                                <option value="Hoàn Kiếm">Hoàn Kiếm</option>
+                                <option value="Hai Bà Trưng">Hai Bà Trưng</option>
+                                <option value="Nam Từ Liêm">Nam Từ Liêm</option>
+                                <option value="Bắc Từ Liêm">Bắc Từ Liêm</option>
+                                <option value="Hà Đông">Hà Đông</option>
+                                <option id="cdQH" value="$address.getkSQuanHuyen()" style="display: none;"></option>
+                            </select>
+                            <span id="errorQH1"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="xp1">Xã/phường<span class="requiredField">*</span></label>
+                            <select class="form-control" id="xp1" name="xaPhuongNS"
+                                onblur="validate('#xp1', '#errorXP1', 'Vui lòng chọn xã phường')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Hạ Đình">Hạ Đình</option>
+                                <option value="Khương Đình">Khương Đình</option>
+                                <option value="Khương Mai">Khương Mai </option>
+                                <option value="Khương Trung">Khương Trung</option>
+                                <option value="Kim Giang">Kim Giang</option>
+                                <option value="Nhân Chính">Nhân Chính </option>
+                                <option value="Phương Liệt">Phương Liệt</option>
+                                <option value="Thanh Xuân Bắc">Thanh Xuân Bắc</option>
+                                <option value="Thanh Xuân Nam">Thanh Xuân Nam</option>
+                                <option value="Thanh Xuân Trung">Thanh Xuân Trung</option>
+                                <option id="cdXP" value="$address.getkSXaPhuong()" style="display: none;"></option>
+                            </select>
+                            <span id="errorXP1"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="control-label">12. Quê quán</p>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="ttp2" class="control-label">Tỉnh/thành phố:<span
+                                    class="requiredField">*</span></label>
+                            <select class="form-control" id="ttp2" name="tinhTPQQ"
+                                onblur="validate('#ttp2', '#errorTTP2', 'Vui lòng chọn tỉnh/ thành phố')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Hà Nội">Hà Nội</option>
+                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                <option value="Hà Giang">Hà Giang</option>
+                                <option value="Cao Bằng">Cao Bằng</option>
+                                <option value="Bắc Cạn">Bắc Cạn</option>
+                                <option id="cdQQ_TTP" value="$address.getqQTinhTP()" style="display: none;"></option>
+                            </select>
+                            <span id="errorTTP2"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="qh2">Quận/huyện<span class="requiredField">*</span></label>
+                            <select class="form-control" id="qh2" name="qHuyenQQ"
+                                onblur="validate('#qh2', '#errorQH2', 'Vui lòng chọn quận/ huyện')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Thanh Xuân">Thanh Xuân</option>
+                                <option value="Cầu Giấy">Cầu Giấy</option>
+                                <option value="Tây Hồ">Tây Hồ</option>
+                                <option value="Hoàn Kiếm">Hoàn Kiếm</option>
+                                <option value="Hai Bà Trưng">Hai Bà Trưng</option>
+                                <option value="Nam Từ Liêm">Nam Từ Liêm</option>
+                                <option value="Bắc Từ Liêm">Bắc Từ Liêm</option>
+                                <option value="Hà Đông">Hà Đông</option>
+                                <option id="cdQQ_QH" value="$address.getqQQuyenHuyen()" style="display: none;"></option>
+                            </select>
+                            <span id="errorQH2"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="xp2">Xã/phường<span class="requiredField">*</span></label>
+                            <select class="form-control" id="xp2" name="xaPhuongQQ"
+                                onblur="validate('#xp2', '#errorXP2', 'Vui lòng chọn xã/ phường')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Hạ Đình">Hạ Đình</option>
+                                <option value="Khương Đình">Khương Đình</option>
+                                <option value="Khương Mai">Khương Mai </option>
+                                <option value="Khương Trung">Khương Trung</option>
+                                <option value="Kim Giang">Kim Giang</option>
+                                <option value="Nhân Chính">Nhân Chính </option>
+                                <option value="Phương Liệt">Phương Liệt</option>
+                                <option value="Thanh Xuân Bắc">Thanh Xuân Bắc</option>
+                                <option value="Thanh Xuân Nam">Thanh Xuân Nam</option>
+                                <option value="Thanh Xuân Trung">Thanh Xuân Trung</option>
+                                <option id="cdQQ_XP" value="$address.getqQXaPhuong()" style="display: none;"></option>
+                            </select>
+                            <span id="errorXP2"></span>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <p class="control-label">13. Nơi thường trú</p>
+                <div class="row">
+
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="ttp3" class="control-label">Tỉnh/thành phố<span class="requiredField">*</span>
+                            </label>
+                            <select class="form-control" id="ttp3" name="tinhTPTT"
+                                onblur="validate('#ttp3', '#errorTTP3', 'Vui lòng chọn tỉnh/ thành phố')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Hà Nội">Hà Nội</option>
+                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                <option value="Hà Giang">Hà Giang</option>
+                                <option value="Cao Bằng">Cao Bằng</option>
+                                <option value="Bắc Cạn">Bắc Cạn</option>
+                                <option id="cdTT_TT" value="$address.gettTTinhTP()" style="display: none;"></option>
+                            </select>
+                            <span id="errorTTP3"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="qh3">Quận/huyện<span class="requiredField">*</span></label>
+                            <select class="form-control" id="qh3" name="qHuyenTT"
+                                onblur="validate('#qh3', '#errorQH3', 'Vui lòng chọn quận/ huyện')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Thanh Xuân">Thanh Xuân</option>
+                                <option value="Cầu Giấy">Cầu Giấy</option>
+                                <option value="Tây Hồ">Tây Hồ</option>
+                                <option value="Hoàn Kiếm">Hoàn Kiếm</option>
+                                <option value="Hai Bà Trưng">Hai Bà Trưng</option>
+                                <option value="Nam Từ Liêm">Nam Từ Liêm</option>
+                                <option value="Bắc Từ Liêm">Bắc Từ Liêm</option>
+                                <option value="Hà Đông">Hà Đông</option>
+                                <option id="cdTT_QH" value="$address.gettTQuanHuyen()" style="display: none;"></option>
+                            </select>
+                            <span id="errorQH3"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="xp3">Xã/phường<span class="requiredField">*</span></label>
+                            <select class="form-control" id="xp3" name="xaPhuongTT"
+                                onblur="validate('#xp3', '#errorXP3', 'Vui lòng chọn xã/ phường')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Hạ Đình">Hạ Đình</option>
+                                <option value="Khương Đình">Khương Đình</option>
+                                <option value="Khương Mai">Khương Mai </option>
+                                <option value="Khương Trung">Khương Trung</option>
+                                <option value="Kim Giang">Kim Giang</option>
+                                <option value="Nhân Chính">Nhân Chính </option>
+                                <option value="Phương Liệt">Phương Liệt</option>
+                                <option value="Thanh Xuân Bắc">Thanh Xuân Bắc</option>
+                                <option value="Thanh Xuân Nam">Thanh Xuân Nam</option>
+                                <option value="Thanh Xuân Trung">Thanh Xuân Trung</option>
+                                <option id="cdTT_XP" value="$address.gettTXaPhuong()" style="display: none;"></option>
+                            </select>
+                            <span id="errorXP3"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="control-label">14. Nơi ở hiện tại</p>
+                <div class="row">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="ttp4" class="control-label">Tỉnh/thành phố<span class="requiredField">*</span>
+                            </label>
+                            <select class="form-control" id="ttp4" name="tinhTPNO"
+                                onblur="validate('#ttp4', '#errorTTP4', 'Vui lòng chọn tỉnh/ thành phố')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Hà Nội">Hà Nội</option>
+                                <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                <option value="Hà Giang">Hà Giang</option>
+                                <option value="Cao Bằng">Cao Bằng</option>
+                                <option value="Bắc Cạn">Bắc Cạn</option>
+                                <option id="cdNO_TTP" value="$address.getnOTinhTP()" style="display: none;"></option>
+                            </select>
+                            <span id="errorTTP4"></span>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="qh4">Quận/huyện<span class="requiredField">*</span></label>
+                            <select class="form-control" id="qh4" name="qHuyenNO"
+                                onblur="validate('#qh4', '#errorQH4', 'Vui lòng chọn quận/ huyện')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Thanh Xuân">Thanh Xuân</option>
+                                <option value="Cầu Giấy">Cầu Giấy</option>
+                                <option value="Tây Hồ">Tây Hồ</option>
+                                <option value="Hoàn Kiếm">Hoàn Kiếm</option>
+                                <option value="Hai Bà Trưng">Hai Bà Trưng</option>
+                                <option value="Nam Từ Liêm">Nam Từ Liêm</option>
+                                <option value="Bắc Từ Liêm">Bắc Từ Liêm</option>
+                                <option value="Hà Đông">Hà Đông</option>
+                                <option id="cdNO_QH" value="$address.getnOQuanHuyen()" style="display: none;"></option>
+                            </select>
+                            <span id="errorQH4"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="xp4">Xã/phường<span class="requiredField">*</span></label>
+                            <select class="form-control" id="xp4" name="xaPhuongNO"
+                                onblur="validate('#xp4', '#errorXP4', 'Vui lòng chọn xã/ phường')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Hạ Đình">Hạ Đình</option>
+                                <option value="Khương Đình">Khương Đình</option>
+                                <option value="Khương Mai">Khương Mai </option>
+                                <option value="Khương Trung">Khương Trung</option>
+                                <option value="Kim Giang">Kim Giang</option>
+                                <option value="Nhân Chính">Nhân Chính </option>
+                                <option value="Phương Liệt">Phương Liệt</option>
+                                <option value="Thanh Xuân Bắc">Thanh Xuân Bắc</option>
+                                <option value="Thanh Xuân Nam">Thanh Xuân Nam</option>
+                                <option value="Thanh Xuân Trung">Thanh Xuân Trung</option>
+                                <option id="cdNO_XP" value="$address.getnOXaPhuong()" style="display: none;"></option>
+                            </select>
+                            <span id="errorXP4"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="dpThonXom1">Đường phố/thôn xóm<span class="requiredField">*</span></label>
+                            <input type="text" class="form-control" id="dpThonXom1" name="dpThonXom"
+                             value="$address.getnOduongPhoThonXom()" 
+                                onblur="validate('#dpThonXom1', '#errorDPX', 'Vui lòng nhập đường phố/ thôn xóm')">
+                            <span id="errorDPX"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="ngheNghiep" class="control-label">15. Nghề nghiệp</label>
+                            <select class="form-control" id="ngheNghiep" type="text" name="ngheNghiep">
+                                <option value="">Chưa xác định</option>
+                                <option value="Công An">Công An</option>
+                                <option value="Bác sĩ">Bác sĩ</option>
+                                <option value="Giáo viên">Giáo viên</option>
+                                <option value="Công nhân">Công nhân</option>
+                                <option value="Nông dân">Nông dân</option>
+                                <option id="cdNgheNghiep" value="$congDan.getNhomMau()" style="display: none;"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="hocvan" class="control-label">16. Trình độ học vấn</label>
+                            <select class="form-control" id="hocvan" name="hocVan">
+                                <option value="">Chưa xác định</option>
+                                <option value="Tiến sĩ">Tiến sĩ</option>
+                                <option value="Thạc sĩ">Thạc sĩ</option>
+                                <option value="Đại học">Đại học</option>
+                                <option value="Cao đẳng">Cao đẳng</option>
+                                <option value="Trung cấp">Trung cấp</option>
+                                <option value="Tốt nghiệp trung học phổ thông">Tốt nghiệp trung học phổ thông</option>
+                                <option value="Tốt nghiệp trung học cơ sở">Tốt nghiệp trung học cơ sở</option>
+                                <option id="cdHocVan" value="$congDan.getNhomMau()" style="display: none;"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="hoTenCha" class="control-label">17. Họ, chữ đệm và tên của cha</label>
+                            <div><input class="form-control" id="hoTenCha" type="text" name="hoTenCha">
+                                <span id="errorHTCha"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="qtCha" class="control-label">Quốc tịch</label>
+                            <select class="form-control" id="qtCha" name="quocTichCha">
+                                <option value="Chưa xác định">Chưa xác định</option>
+                                <option value="Việt Nam">Việt Nam</option>
+                                <option value="Japan">Nhật Bản</option>
+                                <option value="China">Trung Quốc</option>
+                                <option value="USA">Mỹ</option>
+                                <option value="Nga">Nga</option>
+                                <option id="cd_qtCha" value="$congDan.getNhomMau()" style="display: none;"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"> <label for="socmndCha" class="control-label">Số CCCD/CMND</label>
+                    <div> <input class="form-control" id="socmndCha" type="text" name="cmndCuaCha"
+                            onblur="validateCMNDKBB('#socmndCha', '#errorCMCha')">
+                        <span id="errorCMCha"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="hoTenMe" class="control-label">18. Họ, chữ đệm và tên của mẹ</label>
+                            <div><input class="form-control" id="hoTenMe" type="text" name="hoTenMe">
+                                <span id="errorHTMe"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="qtMe" class="control-label">Quốc tịch</label>
+                            <select class="form-control" id="qtMe" name="quocTichMe">
+                                <option value="Chưa xác định">Chưa xác định</option>
+                                <option value="Việt Nam">Việt Nam</option>
+                                <option value="Japan">Nhật Bản</option>
+                                <option value="China">Trung Quốc</option>
+                                <option value="USA">Mỹ</option>
+                                <option value="Nga">Nga</option>
+                                <option id="cd_qtMe" value="$congDan.getNhomMau()" style="display: none;"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"> <label for="socmndMe" class="control-label">Số CCCD/CMND</label>
+                    <div>
+                        <input class="form-control" id="socmndMe" type="text" name="cmndCuaMe"
+                            onblur="validateCMNDKBB('#socmndMe', '#errorCMMe')">
+                        <span id="errorCMMe"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="danToc" class="control-label">19. Họ, chữ đệm và tên của vợ (chồng)</label>
+                            <div><input class="form-control" id="danToc" type="text" name="hoTenVoCh"> </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div for="qtVKCK" class="form-group">
+                            <label class="control-label">Quốc tịch</label>
+                            <select class="form-control" id="qtVKCK" name="quocTichVoCh">
+                                <option value="Chưa xác định">Chưa xác định</option>
+                                <option value="Việt Nam">Việt Nam</option>
+                                <option value="Japan">Nhật Bản</option>
+                                <option value="China">Trung Quốc</option>
+                                <option value="USA">Mỹ</option>
+                                <option value="Nga">Nga</option>
+                                <option id="cd_qtVoCh" value="$congDan.getQuocTich()" style="display: none;"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"> <label for="socmndVoChong" class="control-label">Số CCCD/CMND</label>
+                    <div> <span id="errorCMNDVoCh"></span>
+                        <input class="form-control" id="socmndVoChong" type="text" name="scmtVoCh"
+                            onblur="validateCMNDKBB('#socmndVoChong', '#errorCMVKCK')">
+                        <span id="errorCMVKCK"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="hoTenDDHP" class="control-label">20. Họ, chữ đệm và tên của người ĐDHP</label>
+                            <div>
+                                <input class="form-control" id="hoTenDDHP" type="text" name="hoTenNguoiDKHP">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="qtDDHP" class="control-label">Quốc tịch</label>
+                            <select class="form-control" id="qtDDHP" name="quocTichNguoiDKHP">
+                                <option value="Chưa xác định">Chưa xác định</option>
+                                <option value="Việt Nam">Việt Nam</option>
+                                <option value="Japan">Nhật Bản</option>
+                                <option value="China">Trung Quốc</option>
+                                <option value="USA">Mỹ</option>
+                                <option value="Nga">Nga</option>
+                                <option id="cd_qtDDHP" value="$congDan.getNhomMau()" style="display: none;"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"> <label for="cmndNguoiDKHP" class="control-label">Số CCCD/CMND</label>
+                    <div> <span id="cmndDKHP"></span>
+                        <input class="form-control" id="cmndNguoiDKHP" type="text" name="cmndNguoiDKHP"
+                            onblur="validateCMNDKBB('#cmndNguoiDKHP', '#errorCMDKHP')">
+                        <span id="errorCMDKHP"></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="hoTenChuHo" class="control-label">21. Họ, chữ đệm và tên của chủ hộ<span
+                                    class="requiredField">*</span></label>
+                            <div>
+                                <input class="form-control" id="hoTenChuHo" type="text" name="hoTenChuHo"
+                                    onblur="validate('#hoTenChuHo', '#errorCH', 'Vui lòng nhập họ tên chủ hộ')">
+                                <span id="errorCH"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="form-group">
+                            <label for="qtChuHo" class="control-label">Quốc tịch</label>
+                            <select class="form-control" id="qtChuHo" name="quocTichChuHo">
+                                <option value="Chưa xác định">Chưa xác định</option>
+                                <option value="Việt Nam">Việt Nam</option>
+                                <option value="Japan">Nhật Bản</option>
+                                <option value="China">Trung Quốc</option>
+                                <option value="USA">Mỹ</option>
+                                <option value="Nga">Nga</option>
+                                <option id="cd_qtChuHo" value="$congDan.getNhomMau()" style="display: none;"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group"> <label for="socmndChuho" class="control-label">Số CCCD/CMND</label>
+                    <div>
+                        <input class="form-control" id="socmndChuho" type="text" name="soCMNDChuHo"
+                            onblur="validateCMNDKBB('#socmndChuho', '#errorCMCHo')">
+                        <span id="errorCMCHo"></span>
+                    </div>
+                    <div class="form-group">
+
+                        <label for="qhch" class="control-label">Quan hệ với chủ hộ<span
+                                class="requiredField">*</span></label>
+                        <div class="form-group">
+                            <select class="form-control" id="qhch" name="quanHeChuHo"
+                                onblur="validate('#qhch', '#errorQHCH', 'Vui lòng nhập quan hệ với chủ hội')">
+                                <option value="" disabled selected>Chưa xác định</option>
+                                <option value="Con">Con</option>
+                                <option value="Cháu">Cháu</option>
+                                <option value="Vợ">Vợ</option>
+                                <option value="Chồng">Chồng</option>
+                                <option id="cd_qhch" value="Cháu" style="display: none;">Chồng</option>
+                            </select>
+                            <span id="errorQHCH"></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="md-2">
+                                <p>- Chuyển phát thẻ CCCD đến địa chỉ của công dân (có/không):</p>
+                                <div for="chuyenPhat" class="form-check-inline">
+                                    <label class="form-check-label">
+                                        Có <input type="radio" id="chuyenPhat" value="yes" name="chuyenPhat" checked
+                                            onchange="showChuyenPhat()">
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <label class="form-check-label">
+                                        Không <input type="radio" value="no" name="chuyenPhat"
+                                            onchange="showChuyenPhat()">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="address">
+                        <p class="control-label">Địa chỉ nhận</p>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="ttp5" class="control-label">Tỉnh/thành phố<span
+                                            class="requiredField">*</span> </label>
+                                    <select class="form-control" id="ttp5" name="tinhTPNNhan"
+                                        onblur="validate('#ttp5', '#errorTTP5', 'Vui lòng chọn tỉnh/ thành phố')">
+                                        <option value="" disabled selected>Chưa xác định</option>
+                                        <option value="Hà Nội">Hà Nội</option>
+                                        <option value="Hồ Chí Minh">Hồ Chí Minh</option>
+                                        <option value="Hà Giang">Hà Giang</option>
+                                        <option value="Cao Bằng">Cao Bằng</option>
+                                        <option value="Bắc Cạn">Bắc Cạn</option>
+                                        <option id="cd_TTPnhan" value="$address.getdcNhanTinhTP()" style="display: none;">
+                                        </option>
+                                    </select>
+                                    <span id="errorTTP5"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="qh5">Quận/huyện<span class="requiredField">*</span></label>
+                                    <select class="form-control" id="qh5" name="qHuyenNNhan"
+                                        onblur="validate('#qh5', '#errorQH5', 'Vui lòng chọn quận/ huyện')">
+                                        <option value="" disabled selected>Chưa xác định</option>
+                                        <option value="Thanh Xuân">Thanh Xuân</option>
+                                        <option value="Cầu Giấy">Cầu Giấy</option>
+                                        <option value="Tây Hồ">Tây Hồ</option>
+                                        <option value="Hoàn Kiếm">Hoàn Kiếm</option>
+                                        <option value="Hai Bà Trưng">Hai Bà Trưng</option>
+                                        <option value="Nam Từ Liêm">Nam Từ Liêm</option>
+                                        <option value="Bắc Từ Liêm">Bắc Từ Liêm</option>
+                                        <option value="Hà Đông">Hà Đông</option>
+                                        <option id="cd_QHnhan" value="$address.getdcNhanQuanHuyen()" style="display: none;">
+                                        </option>
+                                    </select>
+                                    <span id="errorQH5"></span>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="xp4">Xã/phường<span class="requiredField">*</span></label>
+                                    <select class="form-control" id="xp5" name="xaPhuongNNhan"
+                                        onblur="validate('#xp5', '#errorXP5', 'Vui lòng chọn xã/ phường')">
+                                        <option value="" disabled selected>Chưa xác định</option>
+                                        <option value="Hạ Đình">Hạ Đình</option>
+                                        <option value="Khương Đình">Khương Đình</option>
+                                        <option value="Khương Mai">Khương Mai </option>
+                                        <option value="Khương Trung">Khương Trung</option>
+                                        <option value="Kim Giang">Kim Giang</option>
+                                        <option value="Nhân Chính">Nhân Chính </option>
+                                        <option value="Phương Liệt">Phương Liệt</option>
+                                        <option value="Thanh Xuân Bắc">Thanh Xuân Bắc</option>
+                                        <option value="Thanh Xuân Nam">Thanh Xuân Nam</option>
+                                        <option value="Thanh Xuân Trung">Thanh Xuân Trung</option>
+                                        <option id="cd_XPnhan" value="$address.getdcNhanXaPhuong()" style="display: none;">
+                                        </option>
+                                    </select>
+                                    <span id="errorXP5"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="dpThonXonDCN">Đường phố/thôn xóm<span
+                                            class="requiredField">*</span></label>
+                                    <input type="text" class="form-control" id="dpThonXonDCN" name="dpThonXomNNhan"
+                                    value="$address.getdiChiNhanDuongPhoThonXom()"
+                                        onblur="validate('#dpThonXonDCN', '#errorTXDCN', 'Vui lòng chọn đường phố/ thôn xóm')">
+                                    <span id="errorTXDCN"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="sdt" class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="soDienThoai">Số điện thoại<span class="requiredField">*</span></label>
+                                    <span>
+                                        <input class="form-control" id="soDienThoai" type="text" name="sdtNhan"
+                                            onblur="validateDiaChi('#soDienThoai', '#errorSdt', 'Vui lòng nhập số điện thoại')">
+                                    </span>
+                                    <span id="errorSdt"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="xacNhan">
+                                <label class="form-check-label" for="xacNhan">
+                                    Tôi xin cam đoan những thông tin kê khai trên là đúng sự thật./.
+                                </label><br>
+                                <span id="errorXacNhan"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-4"></div>
+                        <div class="col-4">
+                            <button style="width: 90px;  margin-right: 20px;" type="button" class="btn btn-success"
+                                onclick="nhapLai()">Nhập lại</button>
+                            <button style="width: 90px;" type="submit" class="btn btn-success">Gửi</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </form>
+    <script>
+        $(function () {
+            $(document).ready(function () {
+                var today = new Date();
+                var time = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
+                $("#date").text(time);
+            });
+        });
+
+        $(document).ready(function () {
+            var cdGioiTinh = $('#cdGioiTinh').val();
+            $('#gioiTinh').val(cdGioiTinh);
+
+            var cdDanToc = $('#cdDanToc').val();
+            $('#danToc').val(cdDanToc);
+
+            var cdTonGiao = $('#cdTonGiao').val();
+            $('#tonGiao').val(cdTonGiao);
+
+            var cdQuocTich = $('#cdQuocTich').val();
+            $('#qt').val(cdQuocTich);
+
+            var cdHonNhan = $('#cdHonNhan').val();
+            $('#honNhan').val(cdHonNhan);
+
+            var cdNhomMau = $('#cdNhomMau').val();
+
+            if (cdNhomMau != null && cdNhomMau.length) {
+                $('#nhomMau').val(cdNhomMau);
+            }
+
+            var cdTTP = $('#cdTTP').val();
+            $('#ttp1').val(cdTTP);
+
+            var cdQH = $('#cdQH').val();
+            $('#qh1').val(cdQH);
+
+            var cdXP = $('#cdXP').val();
+            $('#xp1').val(cdXP);
+
+            var cdQQ_TTP = $('#cdQQ_TTP').val();
+            $('#ttp2').val(cdQQ_TTP);
+
+            var cdQQ_QH = $('#cdQQ_QH').val();
+            $('#qh2').val(cdQQ_QH);
+
+            var cdQQ_XP = $('#cdQQ_XP').val();
+            $('#xp2').val(cdQQ_XP);
+
+            var cdTT_TT = $('#cdTT_TT').val();
+            $('#ttp3').val(cdTT_TT);
+
+            var cdTT_QH = $('#cdTT_QH').val();
+            $('#qh3').val(cdTT_QH);
+
+            var cdTT_XP = $('#cdTT_XP').val();
+            $('#xp3').val(cdTT_XP);
+            var cdNO_TTP = $('#cdNO_TTP').val();
+            $('#ttp4').val(cdNO_TTP);
+
+            var cdNO_QH = $('#cdNO_QH').val();
+            $('#qh4').val(cdNO_QH);
+
+            var cdNO_XP = $('#cdNO_XP').val();
+            $('#xp4').val(cdNO_XP);
+            var cdNgheNghiep = $('#cdNgheNghiep').val();
+            if (cdNgheNghiep != null && cdNgheNghiep.length != 0) {
+                $("#ngheNghiep").val(cdNgheNghiep);
+            }
+
+            var cdHocVan = $('#cdHocVan').val();
+            if (cdHocVan != null && cdHocVan.length != 0) {
+                $("#hocvan").val(cdHocVan);
+            }
+
+            var cd_qtCha = $('#cd_qtCha').val();
+            if (cd_qtCha != null && cd_qtCha.length != 0) {
+                $("#qtCha").val(cd_qtCha);
+            }
+
+            var cd_qtMe = $('#cd_qtMe').val();
+            if (qtMe != null && cd_qtMe.length != 0) {
+                $("#qtCha").val(cd_qtCha);
+            }
+            var cd_qtVoCh = $('#cd_qtVoCh').val();
+            if (cd_qtVoCh != null && cd_qtVoCh.length != 0) {
+                $("#qtVKCK").val(cd_qtVoCh);
+            }
+            var cd_qtDDHP = $('#cd_qtDDHP').val();
+            if (cd_qtDDHP != null && cd_qtDDHP.length != 0) {
+                $("#qtDDHP").val(cd_qtDDHP);
+            }
+            var cd_qtChuHo = $('#cd_qtChuHo').val();
+            if (cd_qtChuHo != null && cd_qtChuHo.length != 0) {
+                $("#qtChuHo").val(cd_qtChuHo);
+            }
+            var cd_qhch = $('#cd_qhch').val();
+            if (qhch != null && cd_qhch.length != 0) {
+                $("#qtChuHo").val(cd_qhch);
+            }
+            var cd_TTPnhan = $('#cd_TTPnhan').val();
+            if (cd_TTPnhan != null && cd_TTPnhan.length != 0) {
+                $("#ttp5").val(cd_TTPnhan);
+            }
+            var cd_QHnhan = $('#cd_QHnhan').val();
+            if (cd_QHnhan != null && cd_QHnhan.length != 0) {
+                $("#qh5").val(cd_QHnhan);
+            }
+
+            var cd_XPnhan = $('#cd_XPnhan').val();
+            if (cd_XPnhan != null && cd_XPnhan.length != 0) {
+                $("#xp5").val(cd_XPnhan);
+            }
+        });
+    </script>
+</body>
+
+</html>

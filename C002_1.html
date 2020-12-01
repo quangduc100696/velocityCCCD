@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>C002</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+<form method="POST">
+    <div class="container">
+        <p class="titleTT">Thông tư số 66/2015/TT-BCA ngày 15/12/2015</p>
+        <div class="content1">
+            <div class="content1-info">
+                <div class="title">
+                    <div class="mavach">
+                        (Mã số, mã vạch một chiều)
+                    </div>
+                    <div class="SCCCD">
+                        <p>PHIẾU THU NHẬN THÔNG TIN CĂN CƯỚC CÔNG DÂN</p>
+                        <span>Số thẻ CCCD</span>
+                        <input type="text" name="SCCCD"/>
+                    </div>
+                </div>
+                <div class="info">
+                    <table>
+                        <tr>
+                            <td>1. Họ, chữ đệm và tên</td>
+                            <td><input type="text" name="hoVaTen"/></td>
+                        </tr>
+                        <tr>
+                            <td>2. Tên gọi khác (nếu có)</td>
+                            <td><input type="text" name="tenKhac"/></td>
+                        </tr>
+                        <tr>
+                            <td>3. Ngày tháng năm sinh</td>
+                            <td><input type="date" name="brithDay"/></td>
+                        </tr>
+                        <tr>
+                            <td>4. Giới tính</td>
+                            <td><select name="sex" >
+                                <option>Nam</option>
+                                <option>Nữ</option>
+                            </select><br></td>
+                        </tr>
+                        <tr>
+                            <td>5. Số CMND/CCCD đã được cấp:</td>
+                            <td><input type="number" name="CMND/CCCD"/></td>
+                        </tr>
+                        <tr>
+                            <td>Cấp ngày</td>
+                            <td><input type="date" name="ngaycap"/></td>
+                        </tr>
+                        <tr>
+                            <td>Nơi cấp</td>
+                            <td><input type="text" name="noicap"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="image">
+                17. Ảnh chân dung 4cm x 6cm
+            </div>
+        </div>
+        <div class="content2-info">
+            <table>
+                <tr>
+                    <td>6. Dân tộc</td>
+                    <td><input type="text" name="dantoc"/></td>
+                    <td>7. Tôn giáo</td>
+                    <td><input type="text" name="tongiao"/></td>
+                    <td>8. Quốc tịch</td>
+                    <td><input type="text" name="quoctich"/></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>9. Nơi đăng kí khai sinh</td>
+                    <td><input type="text" name="noisinh"/></td>
+                </tr>
+                <tr>
+                    <td>10. Quê quán</td>
+                    <td><input type="text" name="quequan"/></td>
+                </tr>
+                <tr>
+                    <td>11. Nơi thường chú</td>
+                    <td><input type="text" name="thuongchu"/></td>
+                </tr>
+                <tr>
+                    <td>12. Nghề nghiệp</td>
+                    <td><input type="text" name="nghenghiep"/></td>
+                </tr>
+                <tr>
+                    <td>13. Trình độ học vấn</td>
+                    <td><input type="text" name="hocvan"/></td>
+                </tr>
+                <tr>
+                    <td>14. Họ và tên của cha</td>
+                    <td><input type="text" name="tenCha"/></td>
+                </tr>
+                <tr>
+                    <td>15. Họ và tên của mẹ</td>
+                    <td><input type="text" name="tenMe"/></td>
+                </tr>
+                <tr>
+                    <td>16. Họ và tên của vợ chồng(nếu có)</td>
+                    <td><input type="text" name="tenVoChong"/></td>
+                </tr>
+                <tr>
+                    <td>18. Đặc điểm nhận dạng</td>
+                    <td><input type="text" name="dacdiem"/></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <td>19.Loại cấp</td>
+                    <td><input type="text" name="loaiCap"/></td>
+                    <td>20. Cấp lần thứ</td>
+                    <td><input type="text" name="capLanThu"/></td>
+                    <td>21. Đơn vị cấp</td>
+                    <td><input type="text" name="donViCap"/></td>
+                </tr>
+            </table>
+            <table class="vanTay">
+                <tr>
+                    <td>Cái phải</td>
+                    <td>Trỏ phải</td>
+                    <td>Giữa phải</td>
+                    <td>Nhẫn phải</td>
+                    <td>Út phải</td>
+                </tr>
+                <tr>
+                    <td>Cái trái</td>
+                    <td>Trỏ trái</td>
+                    <td>Giữa trái</td>
+                    <td>Nhẫn trái</td>
+                    <td>Út trái</td>
+                </tr>
+                <tr rowspan="4">
+                    <td colspan="2"></td>
+                    <td colspan="3"></td>
+                </tr>
+            </table>
+        </div>
+        <div class = "footer">
+            <div class="canBoKT">
+                <p>22. Cán bộ kiểm tra</p>
+                <span>Nhập rõ họ tên</span>
+                <input type="text" name="canBoKTKi"/>
+            </div>
+
+            <div class="nguoiKhai">
+                <span>23. </span>
+                <select name="tinhThanh">
+                    <option>An Giang</option>
+                    <option>Bà Rịa-Vũng Tàu</option>
+                    <option>Bạc Liêu</option>
+                    <option>Bắc Kạn</option>
+                    <option>Bắc Giang</option>
+                    <option>Bắc Ninh</option>
+                    <option>Bến Tre</option>
+                    <option>Bình Dương</option>
+                    <option>Bình Định</option>
+                    <option>Bình Phước</option>
+                    <option>Bình Thuận</option>
+                    <option>Cà Mau</option>
+                    <option>Cao Bằng</option>
+                    <option>Cần Thơ</option>
+                    <option>Đà Nẵng</option>
+                    <option>Đắk Lắk</option>
+                    <option>Đắk Nông</option>
+                    <option>Điện Biên</option>
+                    <option>Đồng Nai</option>
+                    <option>Đồng Tháp</option>
+                    <option>Gia Lai</option>
+                    <option>Hà Giang</option>
+                    <option>Hà Nam</option>
+                    <option selected="selected">Hà Nội</option>
+                    <option>Hà Tây</option>
+                    <option>Hà Tĩnh</option>
+                    <option>Hải Dương</option>
+                    <option>Hải Phòng</option>
+                    <option>Hòa Bình</option>
+                    <option>Hồ Chí Minh</option>
+                    <option>Hậu Giang</option>
+                    <option>Hưng Yên</option>
+                    <option>Khánh Hòa</option>
+                    <option>Kiên Giang</option>
+                    <option>Kon Tum</option>
+                    <option>Lai Châu</option>
+                    <option>Lào Cai</option>
+                    <option>Lạng Sơn</option>
+                    <option>Lâm Đồng</option>
+                    <option>Long An</option>
+                    <option>Nam Định</option>
+                    <option>Nghệ An</option>
+                    <option>Ninh Bình</option>
+                    <option>Ninh Thuận</option>
+                    <option>Phú Thọ</option>
+                    <option>Phú Yên</option>
+                    <option>Quảng Bình</option>
+                    <option>Quảng Nam</option>
+                    <option>Quảng Ngãi</option>
+                    <option>Quảng Ninh</option>
+                    <option>Quảng Trị</option>
+                    <option>Sóc Trăng</option>
+                    <option>Sơn La</option>
+                    <option>Tây Ninh</option>
+                    <option>Thái Bình</option>
+                    <option>Thái Nguyên</option>
+                    <option>Thanh Hóa</option>
+                    <option>Huế</option>
+                    <option>Tiền Giang</option>
+                    <option>Trà Vinh</option>
+                    <option>Tuyên Quang</option>
+                    <option>Vĩnh Long</option>
+                    <option>Vĩnh Phúc</option>
+                    <option>Yên Bái</option>                    
+                </select>
+                <span>Ngày</span>
+                <select name="ngay">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
+                    <option>21</option>
+                    <option selected="selected">22</option>
+                    <option>23</option>
+                    <option>24</option>
+                    <option>25</option>
+                    <option>26</option>
+                    <option>27</option>
+                    <option>28</option>
+                    <option>29</option>
+                    <option>30</option>
+                    <option>31</option>
+                </select>
+                <span>Tháng</span>
+                <select name="thang">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>                    
+                </select>
+                <span>Năm</span>
+                <select name="nam">
+                    <option>2020</option>
+                </select>
+                <p>Người khai nhập rõ họ tên</p>
+                <input type="text" name="nguoiKhaiKi"/>
+            </div>
+        </div>
+        <div class="btn">
+            <input type="button" name="huy" value="Hủy"/>
+            <input type="button" name="submit" value="submit"/>
+        </div>
+    </div>
+</form>
+</body>
+</html>

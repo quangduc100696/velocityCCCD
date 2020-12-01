@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Table</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</head>
+
+<body>
+<form class="form-horizontal" action ="/C001" method = "POST">
+    <h2 style="text-align: center;">Danh sách</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Mã số</th>
+                <th scope="col">Họ tên khai sinh</th>
+                <th scope="col">Giới tính</th>
+                <th scope="col">Ngày sinh</th>
+                <th scope="col">Loại cấp</th>
+                <th scope="col">Số CMND/CCCD đã được cấp</th>
+                <th scope="col">Xác nhận CMND</th>
+                <th scope="col">Trạng thái</th>
+                <th scope="col">Xử lý</th>
+            </tr>
+        </thead>
+        <tbody>
+        	#set($i = 0);
+        	#foreach($toKhai in $toKhais)
+        		#set($i = $i + 1)
+				  <tr>
+				       <td>$i</td>
+					   <td>$toKhai.getCongDan().getId()</td>
+					   <td>$toKhai.getCongDan().getHoVaTen()</td>
+					   <td> #if($toKhai.getCongDan().getGioiTinh() == 1) 
+                    				Nam
+                    		  #elseif($toKhai.getCongDan().getGioiTinh() == 2) 
+                    		  	    Nữ
+                    		  #else 
+                    		  		Khác
+                    		  #end
+                       </td>
+					   <td>$toKhai.getCongDan().getNgaySinh()</td>
+					   <td>$toKhai.getCongDan().getYeuCauCongDan()</td>
+					   <td>$toKhai.getCongDan().getCmnd()</td>
+					   <td>
+					   		#if($toKhai.getCongDan().getXacNhanCMND() == 1)
+					   			Có
+					   		#else 
+					   			Không
+					   		#end
+					  </td>
+					   <td>$toKhai.getTrangThai().getStatus()</td>
+					   <td>
+					   	#set($nameFile = ($toKhai.getCongDan().getId() + ".pdf"))
+	                    <a href="/C001/download/file/$toKhai.getId()"  target="_blank" class="btn btn-success">Xem</a>
+	                    <a href="/C001/duyet/$toKhai.getId()" class="btn btn-success">Duyệt</a>
+	                    <button type="button" class="btn btn-info">Hủy</button>
+	                	</td>
+				  </tr>
+			#end
+        </tbody>
+    </table>
+ </form>
+</body>
+
+</html>

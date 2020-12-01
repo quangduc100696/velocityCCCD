@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<form method="POST">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10">
+                <p class="titleTT">Thông tư số 66/2015/TT-BCA ngày 15/12/2015</p>
+                <p class="titleTT">CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM</p>
+                <p class="titleTT">Độc lập - Tự do - Hạnh phúc</p>
+                <span>Số </span><input type="text" name="so"/><span>/GXN-CCCD</span>
+                <div class="content">
+                    <p class="titleTT">GIẤY XÁC NHẬN</p>
+                    <p class="titleTT">SỐ CHỨNG MINH NHÂN DÂN</p>
+            </div>
+            <div class="col-md-10">
+               
+                    <label for="usr">1. Xác nhận</label>
+                    <input  type="text" class="form-control" name="xacNhan" id="usr">
+                    <label for="usr">Họ và tên</label>
+                    <input type="text" class="form-control" name="hoVaTen" id="usr">
+                    <label for="usr">Nơi cư trú</label>
+                    <input type="text" class="form-control" name="noiCuTru" id="usr">
+           
+                    <div class="form-group">
+                        <label for="sel1">4. Giới tính</label>
+                        <select class="form-control" id="sel1">
+                          <option>Nam</option>
+                          <option>Nữ</option>
+                          <option>Khác</option>
+                        </select>
+                    </div>
+                
+                    <label for="usr">Ngày sinh</label>
+                        <input  type="date" class="form-control" name="ngaySinh" id="usr">
+               
+            </div>
+            
+            <div class="col-md-10">
+              
+                    <label for="usr">Số CMTND đã được cấp</label>
+                    <input  type="number" class="form-control" name="SoCMND" id="usr">
+                    <div class="form-group">
+                        <label for="sel1">Do công an cấp</label>
+                        <select class="form-control" id="sel1">
+                            <option>Công An TP Hà Nội</option>
+                            <option>Công An Ninh Bình</option>
+                            <option>Công An TP HCM</option>
+                        </select>
+                     </div>
+                     <label for="usr">Ngày cấp</label>
+                    <input  type="date" class="form-control" name="ngayCap" id="usr">
+                    <label for="usr">Nay đã được cấp số</label>
+                    <input type="number" class="form-control" name="CCCD" id="usr">
+                    <label for="usr">Số CMTND đã được cấp</label>
+                    <input  type="number" class="form-control" name="SoCMND" id="usr">
+                    <label for="usr">Do Cục Cảnh sát đăng ký, quản lý cư trú và dữ liệu quốc gia về dân cư cấp ngày</label>
+                    <input  type="date" class="form-control" name="cucQLCap" id="usr">
+               
+            </div>
+            <div style="margin-top: 15px;" class="col-md-10">
+                
+                    <select name="tinhThanh">
+                        <option>Hà Giang</option>
+                        <option>Hà Nam</option>
+                        <option selected="selected">Hà Nội</option>
+                        <option>Hà Tây</option>
+                        <option>Hà Tĩnh</option>
+                        <option>Hải Dương</option>
+                    </select>
+                    <span for="usr">Ngày </span>
+                    <span id= "date"></span>
+              
+             </div>
+            <div style="margin-top: 15px;" class="col-md-10">
+                <div class="col-md-8">
+                    <button type="button" class="btn btn-primary">Hủy</button>
+                    <button type="button" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+</form>
+<script>
+    $(function() {
+        $(document).ready(function() {
+            var today = new Date();
+            var time = today.getDate() + "-" + today.getMonth() + "-" + today.getFullYear();
+            $("#date").text(time);
+        });
+    });
+</script>
+</body>
+</html>

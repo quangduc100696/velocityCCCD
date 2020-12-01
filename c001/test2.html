@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>C002</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./css/C002.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        #footer {
+            width: 100%;
+            height: 100px;
+        }
+
+        .mavach {
+            width: 15%;
+            height: 100%;
+            float: left;
+            border: 1px solid;
+        }
+
+        .SCCCD {
+            width: 85%;
+            height: 100%;
+            float: left;
+            border: 1px solid;
+        }
+
+        .SCCCD p {
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .SCCCD span {
+            margin-left: 30%;
+        }
+
+        .SCCCD input {
+            height: 34px;
+            padding: 6px 12px;
+            font-size: 14px;
+            color: #555;
+            background-color: #fff;
+            background-image: none;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .titleTT {
+            font-weight: bold;
+        }
+
+        #content1-info {
+            height: 200px;
+            margin-top: 10px;
+        }
+
+        .cbkt {
+            width: 300px;
+        }
+
+        #image {
+            height: 99%;
+            border: 1px solid;
+            float: right;
+        }
+
+        #vanTayPhai {
+            margin-top: 20px;
+        }
+
+        #vanTayPhai,
+        #vanTayTrai {
+            display: flex;
+            height: 120px;
+        }
+
+        #vanTayTrai {
+            margin-top: 3px;
+        }
+
+        #vanTayPhai div,
+        #vanTayTrai div {
+            width: 20%;
+            margin-right: 3px;
+            border: 1px solid
+        }
+
+        #vanTayPhai div img,
+        #vanTayTrai div img {
+            width: 99%;
+            height: 78%;
+        }
+     
+        #vanTayNgonChum {
+            display: flex;
+            height: 150px;
+            margin-top: 3px;
+            margin-bottom: 10px;
+        }
+
+        #vanTayNgonChum div {
+            width: 50%;
+            border: 1px solid;
+            margin-right: 3px;
+
+        }
+        #vanTayNgonChum div img {
+            width: 99%;
+            height: 80%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <form action="c002" method="POST" enctype="multipart/form-data">
+                <div class="col-md-10">
+
+                    <p class="titleTT">Thông tư số 66/2015/TT-BCA ngày 15/12/2015</p>
+                    <div id="footer" class="border border-secondary">
+                        <div class="mavach">
+                            (Mã số, mã vạch một chiều)
+                            <span></span>
+                        </div>
+                        <div class="SCCCD">
+                            <p>PHIẾU THU NHẬN THÔNG TIN CĂN CƯỚC CÔNG DÂN</p>
+                            <span>Số thẻ CCCD</span>
+                            <input type="text" name="soTheCCCD" id="usr">
+                        </div>
+                    </div>
+                </div>
+                <div id="content1-info" class="col-md-10">
+                    <div class="col-md-8">
+                        <label for="usr">1. Họ và tên</label>
+                        <input type="text" class="form-control" name="hoVaTen" id="usr">
+                        <label for="usr">2. Tên gọi khác</label>
+                        <input type="text" class="form-control" name="tenGoiKhac" id="usr">
+                        <label for="usr">3. Ngày tháng năm sinh</label>
+                        <input type="date" class="form-control" name="birthDay" id="usr">
+                    </div>
+                    <div id="image" class="col-md-2">
+                        <label for="file" style="cursor: pointer;">17. Image 4x6</label>
+                        <input style="display: none;" type="file" accept="image/*" name="imageChanDung" id="file"
+                            onchange="loadFile(event,'output')">
+                        <img id="output" width="130px" height="165px" />
+
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="sel1">4. Giới tính</label>
+                            <select class="form-control" id="sel1">
+                                <option>Nam</option>
+                                <option>Nữ</option>
+                                <option>Khác</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="usr">5. Số CMND/CCCD đã được cấp</label>
+                        <input type="text" class="form-control" name="SoCMND/CCCD" id="usr">
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-4">
+                        <label for="usr">Cấp ngày </label>
+                        <input type="date" class="form-control" name="capNgay" id="usr">
+                    </div>
+                    <div class="col-md-4">
+                        <label for="usr">Nơi Cấp </label>
+                        <select class="form-control" id="sel1">
+                            <option>Công An TP Hà Nội</option>
+                            <option>Công An Ninh Bình</option>
+                            <option>Công An TP HCM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-4">
+                        <label for="usr">6. Dân tộc </label>
+                        <select class="form-control" id="sel1">
+                            <option>Kinh</option>
+                            <option>Mường</option>
+                            <option>Mông</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="usr">7. Tôn giáo </label>
+                        <select class="form-control" id="sel1">
+                            <option>Không</option>
+                            <option>Hồi Giáo</option>
+                            <option>Thiên Chúa</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-10">
+                    <div class="col-md-4">
+                        <label for="usr">8. Quốc tịch </label>
+                        <select class="form-control" id="sel1">
+                            <option>Việt Nam</option>
+                            <option>USA</option>
+                            <option>China</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-8">
+                        <label for="usr">9. Nơi đăng kí khai sinh</label>
+                        <input type="text" class="form-control" name="dangKiKK" id="usr">
+                        <label for="usr">10. Quên quán</label>
+                        <input type="text" class="form-control" name="queQuan" id="usr">
+                        <label for="usr">11. Nơi thường trú</label>
+                        <input type="text" class="form-control" name="thuongTru" id="usr">
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-5">
+                        <label for="usr">12. Nghề nghiệp</label>
+                        <input type="text" class="form-control" name="birthDay" id="usr">
+                    </div>
+                    <div class="col-md-3">
+                        <label for="usr">13. Trình độ học vấn</label>
+                        <select class="form-control" id="gender" name="hocVan">
+                            <option value="1/12">1/12</option>
+                            <option value="2/12">2/12</option>
+                            <option value="3/12">3/12</option>
+                            <option value="4/12">4/12</option>
+                            <option value="5/12">5/12</option>
+                            <option value="6/12">6/12</option>
+                            <option value="7/12">7/12</option>
+                            <option value="8/12">8/12</option>
+                            <option value="9/12">9/12</option>
+                            <option value="10/12">10/12</option>
+                            <option value="11/12">11/12</option>
+                            <option value="12/12">12/12</option>
+                            <option value="Trung Cấp">Trung cấp</option>
+                            <option value="Cao Đẳng">Cao đẳng</option>
+                            <option value="Đại Học">Đại học</option>
+                            <option value="Khác">Khác</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-8">
+                        <label for="usr">14. Họ và tên của cha</label>
+                        <input type="text" class="form-control" name="hoTenCha" id="usr">
+                        <label for="usr">15. Họ và tên mẹ</label>
+                        <input type="text" class="form-control" name="hoTenMe" id="usr">
+                        <label for="usr">16. Họ tên vợ chồng(nếu có)</label>
+                        <input type="text" class="form-control" name="tenVoOrChong" id="usr">
+                        <label for="usr">18. Đặc điểm nhận dạng</label>
+                        <input type="text" class="form-control" name="dacDiemNhanDang" id="usr">
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-4">
+                        <label for="usr">19. Loại Cấp </label>
+                        <select class="form-control" id="sel1">
+                            <option>Cấp mới</option>
+                            <option>Đổi</option>
+                            <option>Cấp lại</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="usr">20. Cấp lần thứ </label>
+                        <select class="form-control" id="sel1">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-4">
+                        <label for="usr">21. Đơn vị cấp </label>
+                        <select class="form-control" id="sel1">
+                            <option>Công An TP Hà Nội</option>
+                            <option>Công An Ninh Bình</option>
+                            <option>Công An TP HCM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div id="vanTayPhai" class="col-md-8">
+                        <div>
+                            <label for="Cp" style="cursor: pointer;">Cái phải</label>
+                            <input style="display: none;" type="file" id="Cp" accept="image/*" name="imageCaiPhai"
+                                onchange="loadFile(event,'outputCP')">
+                            <img id="outputCP" />
+                        </div>
+                        <div>
+                            <label for="Tp" style="cursor: pointer;">Trỏ phải</label>
+                            <input style="display: none;" type="file" id="Tp" accept="image/*" name="imageTroPhai"
+                                onchange="loadFile(event,'outputTP')">
+                            <img id="outputTP" />
+                        </div>
+                        <div>
+                            <label for="Gp" style="cursor: pointer;">Giữa phải</label>
+                            <input style="display: none;" type="file" id="Gp" accept="image/*" name="imageGiuaPhai"
+                                onchange="loadFile(event,'outputGP')">
+                            <img id="outputGP" />
+                        </div>
+                        <div>
+                            <label for="Np" style="cursor: pointer;">Cái phải</label>
+                            <input style="display: none;" type="file" id="Np" accept="image/*" name="imageNhanPhai"
+                                onchange="loadFile(event,'outputNP')">
+                            <img id="outputNP" />
+                        </div>
+                        <div>
+                            <label for="Up" style="cursor: pointer;">Cái phải</label>
+                            <input style="display: none;" type="file" id="Up" accept="image/*" name="imageUtPhai"
+                                onchange="loadFile(event,'outputUP')">
+                            <img id="outputUP" />
+                        </div>
+                    </div>
+
+                    <div id="vanTayTrai" class="col-md-8">
+                        <div>
+                            <label for="Tp" style="cursor: pointer;">Cái trái</label>
+                            <input style="display: none;" type="file" id="Tp" accept="image/*" name="imageCaiTrai"
+                                onchange="loadFile(event,'outputCT')">
+                            <img id="outputCT" />
+                        </div>
+                        <div>
+                            <label for="Tt" style="cursor: pointer;">Trỏ trái</label>
+                            <input style="display: none;" type="file" id="Tt" accept="image/*" name="imageTroTrai"
+                                onchange="loadFile(event,'outputTT')">
+                            <img id="outputTT" />
+                        </div>
+                        <div>
+                            <label for="Gt" style="cursor: pointer;">Giữa trái</label>
+                            <input style="display: none;" type="file" id="Gt" accept="image/*" name="imageGiuaTrai"
+                                onchange="loadFile(event,'outputGT')">
+                            <img id="outputGT" />
+                        </div>
+                        <div>
+                            <label for="Ct" style="cursor: pointer;">Cái trái</label>
+                            <input style="display: none;" type="file" id="Ct" accept="image/*" name="imageNhanTrai"
+                                onchange="loadFile(event,'outputNT')">
+                            <img id="outputNT" />
+                        </div>
+                        <div>
+                            <label for="Ut" style="cursor: pointer;">Cái trái</label>
+                            <input style="display: none;" type="file" id="Ut" accept="image/*" name="imageUtTrai"
+                                onchange="loadFile(event,'outputUT')">
+                            <img id="outputUT" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div id="vanTayNgonChum" class="col-md-8">
+                        <div class="col-md-4">
+                            <label for="bonNgonTrai" style="cursor: pointer;">4 ngón chụm tay trái</label>
+                            <input style="display: none;" type="file" id="bonNgonTrai" accept="image/*"
+                                name="bonNgonTrai" onchange="loadFile(event,'output4NT')">
+                            <img id="output4NT" />
+                        </div>
+                        <div class="col-md-4">
+                            <label for="bonNgonPhai" style="cursor: pointer;">4 ngón chụm tay trái</label>
+                            <input style="display: none;" type="file" id="bonNgonPhai" accept="image/*"
+                                name="bonNgonPhai" onchange="loadFile(event,'output4NP')">
+                            <img id="output4NP" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <div class="col-md-6">
+                        <label for="usr">22. Cán bộ kiểm tra</label>
+                        <input type="text" class="form-control" name="dangKiKK" id="cbkt">
+                        <label for="usr">23. Date</label>
+                        <span id="date"></span>
+                    </div>
+                </div>
+                <div style="margin-bottom: 30px;" class="col-md-10">
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-primary">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $(document).ready(function () {
+                var today = new Date();
+                var time = today.getDate() + "-" + (today.getMonth() + 1) + "-" + today.getFullYear();
+                $("#date").text(time);
+            });
+        });
+        var loadFile = function (event, idImage) {
+            var image = document.getElementById(idImage);
+            image.src = URL.createObjectURL(event.target.files[0]);
+        };
+    </script>
+</body>
+
+</html>

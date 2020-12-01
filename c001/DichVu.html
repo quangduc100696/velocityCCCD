@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đại chỉ</title>
+     <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<style>    
+    .form__header-right p {
+        font-weight: 500;
+    }
+    .form__header-center h3,
+    .form__header-center p
+   {
+        text-align: center;
+    }
+    
+    .form__header-center h3,
+    .form__header-name h3,
+    .form__header-name h4 {
+        text-transform: uppercase;
+    }
+    
+    .form__header-center p {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 20px;
+        margin: 0!important;
+    }
+    .form__header-center {
+        margin-top: 30px;
+    }
+    .form__header-name h3 {
+        margin-top: 60px;
+    }
+    .textError {
+        color: red;
+    }
+</style>
+
+<body>
+<form action ="/cqca/$id" method = "POST" onsubmit = "return validateTN()">
+    <div class="container">
+
+        <div style="margin-top: 60px;" class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="noiTN" style="font-size: 18px;">Chọn đơn vị thu thập thông tin</label>
+                    <select class="form-control"  id="noiTN" name = "noiTN">
+                        <option value="">Chưa xác định</option>
+                        <option value="Công An Hà Nội 103 - Nguyễn Tuân">Công An Hà Nội 103 - Nguyễn Tuân</option>
+                        <option value="Công An Quận Thanh Xuân 200 - Nguyễn Trãi">Công An Quận Thanh Xuân 200 - Nguyễn Trãi</option>
+                        <option value="Công An Quận Đống Đa 152 - Xã Đàn">Công An Quận Đống Đa 152 - Xã Đàn</option>
+                        <option value="Công An Quận Cầu Giấy 150 - Xuân Thủy">Công An Quận Cầu Giấy 150 - Xuân Thủy</option>
+                    </select>
+                    <span id="error" value="*">*</span>
+                    <input type="text" value="2" id="t" style="display: none;">
+                  </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3"></div>
+        <div class="col-3">
+            <button type="submit" class="btn btn-success">Tiếp theo</button>
+        </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    function validateTN() {
+        
+    var yccd =  $("#noiTN").val();
+    alert($("#t").val());
+     alert("55555555555 :"+yccd);
+    if(yccd == null || yccd.length == 0) {
+        $("#error").text("Chọn đơn vị thu thập thông tin");
+        $("#error").addClass('textError');
+        return false;
+    } else {
+        $("#error").text("");
+         alert("55555555555");
+        return true;
+    }
+    return true;
+}
+
+</script>
+</body>
+</html>

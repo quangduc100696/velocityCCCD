@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giấy hẹn</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<style>
+    .form__header-right p {
+        font-weight: 500;
+    }
+
+    .form__header-center h3,
+    .form__header-center p,
+    .form__header-name h3,
+    .form__header-right p,
+    .form__footer-right p,
+    .form__footer-right h3,
+    .form__header-name h4 {
+        text-align: center;
+    }
+
+    .form__header-center h3,
+    .form__header-name h3,
+    .form__header-name h4 {
+        text-transform: uppercase;
+    }
+
+    .form__header-center p {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 20px;
+        margin: 0 !important;
+    }
+
+    .form__header-name h3 {
+        margin-top: 30px;
+    }
+    .nd {
+        font-weight: bold;
+        font-size: 18px;
+    }
+</style>
+
+<body>
+    <form action="/c001/giayhen/$giayHen.getId()" method="POST">
+        <div class="container">
+            <div class="row">
+                <div class="col-6 col-md-6"></div>
+                <div class="col-6 col-md-6">
+                    <div class="form__header-right">
+                        <p>Thông tư số 66/2015/TT-BCA ngày 15/12/2015</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form__header-center">
+                <h3>Cộng hòa xã hội chủ nghĩa Việt Nam</h3>
+                <p>Độc lập - Tự do - Hạnh phúc</p>
+                <p>--------------</p>
+            </div>
+            <div class="form__header-name">
+                <h3>Giấy hẹn</h3>
+                <h4>Thu thập thông tin căn cước công dân</h4>
+            </div>
+            <br><br>
+
+
+            <div class="row">
+                <div class="col-6">
+                    <h5>Công An thành phố Hà Nội</h5>
+                    <div class="form_footer-right">
+                        <span>đã tiếp nhận hồ sơ và làm thủ tục thẻ Căn cước công dân đối với công dân:</span>
+                    </div>
+                    <div class="form-group">
+                        <p class="nd">Họ, tên đệm công dân: $toKhai.getCongDan().getHoVaTen() </p>
+                    </div>
+
+                    <div class="form-group">
+                        <p class="nd">Sinh ngày: $toKhai.getCongDan().getNgaySinh() </p>
+                    </div>
+
+                    <div class="form-group"> <span>Giới tính: </span>
+                        <span class="nd">
+                         #if($giayHen.getCongDan().getGioiTinh() == 1)
+                            Nam
+                            #elseif($toKhai.getCongDan().getGioiTinh() == 2)
+                            Nữ
+                            #else
+                            Khác
+                            #end
+                        </span>
+                    </div>
+
+
+                    <div class="form-group">
+                        <p> Nơi thường trú: $toKhai.getCongDan().getThuongTru() </p>
+                    </div>
+                    <input style="display: none;" type="text" value="$giayHen" name="giayHenDto">
+                    <div class="form-group">
+
+                        <span> Thời gian hẹn công dân đến bổ sung thông tin thẻ căn cước công dân:</span>
+                        <br>
+
+                        <div class="form-group"> <span>Hà Nội ngày: </span>
+                            <span> $toKhai.getNgayHen()</span>
+                       
+
+                                <span>Vào lúc &nbsp $toKhai.getGio() </span>
+
+                                <span>giờ</span>
+
+                                <span>phút &nbsp $toKhai.getPhut()</span>
+                        </div>
+
+                    <div class="form__footer-right">
+                        <div class="form-group"> <label class="control-label">Địa chỉ: </label>
+                             <span>$toKhai.getDiaChi()</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-6">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-3">
+                <div class="form__footer-right">
+                    <span>Ngày </span><span id="date" name="date"></span><br>
+                    <h3>Người lập giấy hẹn</h3>
+                    <p><i>(Ghi rõ họ tên)</i></p>
+                    <select class="form-control" id="cbkt" name="tenCBXN">
+                        #foreach($canbo in $canBos)
+                        <option value=$canbo.getId()>
+                            $canbo.getHoVaTen()
+                        </option>
+                        #end
+                    </select>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-2">
+                <button style="margin-top: 15px; width: 100px;" type="submit" class="btn btn-success">Gửi</button>
+            </div>
+        </div>
+        </div>
+    </form>
+    <script>
+        $(function () {
+            $(document).ready(function () {
+                var today = new Date();
+                var time = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
+                $("#date").text(time);
+            });
+        });
+    </script>
+</body>
+
+</html>
